@@ -1,12 +1,14 @@
 package com.cmg.Springboot.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.springframework.data.redis.core.RedisHash;
 
 @Entity
-public class Customer {
+public class Customer implements Serializable{
 	@Id
 	private String id;
 	private String name;

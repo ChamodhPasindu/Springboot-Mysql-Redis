@@ -1,9 +1,10 @@
 package com.cmg.Springboot.util;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@JsonSerialize
-public class ResponseUtil {
+public class ResponseUtil implements Serializable {
     private int code;
     private String message;
     private Object data;

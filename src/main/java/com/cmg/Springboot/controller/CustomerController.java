@@ -34,7 +34,7 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = "singleCustomer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	@Cacheable(value = "singleCustomer",key="#id")
+	@Cacheable(value = "customer",key="#id")
 	public ResponseUtil getCustomer(@PathVariable(value = "id") String id) {
 		   return new ResponseUtil(200,"Ok",service.searchCustomer(id));
 	}
@@ -45,15 +45,15 @@ public class CustomerController {
 		return new ResponseUtil(200, "Save", null);
 	}
 
-	@PutMapping(path = "update",produces = MediaType.APPLICATION_JSON_VALUE)
-	@CachePut(value = "update")
-	public ResponseUtil updateCustomer(@RequestBody Customer customer) {
+	@PutMapping(path = "update/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@CachePut(value = "customer",key="#id")
+	public ResponseUtil updateCustomer(@PathVariable (value = "id") String id,@RequestBody Customer customer) {
 		service.updateCustomer(customer);
 		return new ResponseUtil(200, "Updated", null);
 	}
 
 	@DeleteMapping(path = "remove/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	@CacheEvict(value = "remove",allEntries = true)
+	@CacheEvict(value = "customer",allEntries = true)
 	public ResponseUtil deleteCustomer(@PathVariable(value = "id") String id) {
 		service.deleteCustomer(id);
 		return new ResponseUtil(200, "Deleted", null);

@@ -48,8 +48,7 @@ public class CustomerController {
 	@PutMapping(path = "update/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	@CachePut(value = "customer",key="#id")
 	public ResponseUtil updateCustomer(@PathVariable (value = "id") String id,@RequestBody Customer customer) {
-		service.updateCustomer(customer);
-		return new ResponseUtil(200, "Updated", null);
+		return new ResponseUtil(200, "Updated", service.updateCustomer(customer));
 	}
 
 	@DeleteMapping(path = "remove/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -31,17 +31,15 @@ public class CustomerService {
 		} else {
 			throw new RuntimeException("Please check the Customer ID.. No Such Customer..!");
 		}
-
 	}
 
-	public void updateCustomer(Customer customer) {
+	public Customer updateCustomer(Customer customer) {
 		System.out.println("update");
 		if (repo.existsById(customer.getId())) {
-			repo.save(customer);
+			return repo.save(customer);
 		} else {
 			throw new RuntimeException("No Such Customer To Update..! Please Check the ID..!");
 		}
-
 	}
 
 	public Customer searchCustomer(String id) {

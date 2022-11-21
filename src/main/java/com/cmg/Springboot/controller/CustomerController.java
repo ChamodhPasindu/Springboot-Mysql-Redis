@@ -3,6 +3,9 @@ package com.cmg.Springboot.controller;
 import org.springframework.http.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +34,8 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = "singleCustomer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseUtil getCustomer(@PathVariable String id) {
+	@Cacheable(value = "singleCustomer",key="#id")
+	public ResponseUtil getCustomer(@PathVariable(value = "id") String id) {
 		   return new ResponseUtil(200,"Ok",service.searchCustomer(id));
 	}
 
@@ -41,14 +45,16 @@ public class CustomerController {
 		return new ResponseUtil(200, "Save", null);
 	}
 
-	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "update",produces = MediaType.APPLICATION_JSON_VALUE)
+	@CachePut(value = "update")
 	public ResponseUtil updateCustomer(@RequestBody Customer customer) {
 		service.updateCustomer(customer);
 		return new ResponseUtil(200, "Updated", null);
 	}
 
 	@DeleteMapping(path = "remove/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseUtil deleteCustomer(@PathVariable String id) {
+	@CacheEvict(value = "remove",allEntries = true)
+	public ResponseUtil deleteCustomer(@PathVariable(value = "id") String id) {
 		service.deleteCustomer(id);
 		return new ResponseUtil(200, "Deleted", null);
 	}

@@ -25,6 +25,7 @@ public class CustomerService {
 	}
 
 	public void deleteCustomer(String id) {
+		System.out.println("Delete");
 		if (repo.existsById(id)) {
 			repo.deleteById(id);
 		} else {
@@ -34,6 +35,7 @@ public class CustomerService {
 	}
 
 	public void updateCustomer(Customer customer) {
+		System.out.println("update");
 		if (repo.existsById(customer.getId())) {
 			repo.save(customer);
 		} else {
@@ -43,6 +45,7 @@ public class CustomerService {
 	}
 
 	public Customer searchCustomer(String id) {
+		System.out.println("search");
 		if (repo.existsById(id)) {
 			return repo.findById(id).get();
 		} else {
@@ -51,6 +54,7 @@ public class CustomerService {
 	}
 
 	public List<Customer> getAllCustomers() {
+		System.out.println("get All");
 		return repo.findAll();
 	}
 

@@ -3,6 +3,8 @@ package com.cmg.Springboot.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.data.redis.core.RedisHash;
+
 @Entity
 public class Customer {
 	@Id
@@ -57,8 +59,6 @@ public class Customer {
 		this.dob = dob;
 		this.email = email;
 	}
-	
-	
 	
 	public Customer() {
 		super();

@@ -1,5 +1,8 @@
 package com.cmg.Springboot.util;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
 public class ResponseUtil {
     private int code;
     private String message;
